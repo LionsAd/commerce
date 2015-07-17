@@ -34,5 +34,8 @@ cd ..
 # Download more dependencies.
 drush dl -y inline_entity_form
 
+# Ensure the module is linked into the codebase.
+drupal_ti_ensure_module
+
 # Enable main module and submodules.
 drush en -y commerce commerce_product commerce_order
