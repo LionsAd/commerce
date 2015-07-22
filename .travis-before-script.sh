@@ -2,6 +2,17 @@
 
 set -e $DRUPAL_TI_DEBUG
 
+# Try mysql optimizations.
+
+# Increase the MySQL connection timeout on the PHP end.
+echo "mysql.connect_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+echo "default_socket_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+# Increase the MySQL server timetout and packet size.
+mysql -e "SET GLOBAL wait_timeout = 36000;"
+mysql -e "SET GLOBAL max_allowed_packet = 33554432;"
+
+
 # Ensure the right Drupal version is installed.
 # Note: This function is re-entrant.
 drupal_ti_ensure_drupal
