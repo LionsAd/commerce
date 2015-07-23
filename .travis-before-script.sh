@@ -28,6 +28,9 @@ cd "$DRUPAL_TI_DRUPAL_DIR"
 drush pm-enable composer_manager --yes
 drush composer-manager-init
 
+# Ensure the module is linked into the codebase and enabled.
+drupal_ti_ensure_module
+
 # Rebuild core dependencies.
 # @todo Is that really needed?
 cd core
@@ -35,9 +38,6 @@ rm -rf vendor
 composer drupal-rebuild
 composer update --prefer-source -n --verbose
 cd ..
-
-# Ensure the module is linked into the codebase.
-drupal_ti_ensure_module
 
 # Enable main module and submodules.
 drush en -y commerce commerce_product commerce_order
